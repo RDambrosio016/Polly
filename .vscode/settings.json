@@ -1,0 +1,13 @@
+{
+    "sqltools.connections": [
+        {
+            "askForPassword": true,
+            "database": "polly",
+            "dialect": "PostgreSQL",
+            "name": "postgres",
+            "port": 5432,
+            "server": "localhost",
+            "username": "root"
+        }
+    ]
+}

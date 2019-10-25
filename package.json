@@ -1,0 +1,26 @@
+{
+  "name": "polly",
+  "version": "1.0.0",
+  "description": "A discord bot for making polls",
+  "main": "index.js",
+  "dependencies": {
+    "common-tags": "^1.8.0",
+    "discord-akairo": "^8.0.0-beta.8",
+    "@types/node":"12.7.12",
+    "discord.js": "^12.0.0-dev",
+    "dotenv": "^8.1.0",
+    "node-gyp": "^6.0.0",
+    "node-postgres": "^0.0.1",
+    "pg": "^7.12.1",
+    "pg-native": "^3.0.0",
+    "rebuild": "^0.1.2",
+    "ts-node": "^8.4.1",
+    "uuid": "^3.3.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
