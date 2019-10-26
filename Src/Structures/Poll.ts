@@ -1,6 +1,7 @@
 import { poll, vote } from "../../typings";
 import uuid from 'uuid/v4'
 import { MessageEmbed } from 'discord.js'
+import PGClient from './PostgresClient';
 
 export default class BasePoll {
     public poll: poll
