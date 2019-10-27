@@ -3,6 +3,6 @@ CREATE TABLE IF NOT EXISTS settings (
     anonymousVotes BOOLEAN DEFAULT FALSE,
     customPrompts TEXT[] DEFAULT NULL,
     numOptions INT DEFAULT 0,
-    endTimestamp BIGINT DEFAULT NULL,
+    endTimestamp TEXT DEFAULT NULL,
     FOREIGN KEY (poll_id) REFERENCES polls(id)
 );

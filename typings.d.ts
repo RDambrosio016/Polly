@@ -14,7 +14,8 @@ export interface poll {
     guild: string
     id?: string //UUID identifier for 
     options: string[]
-    settings?: object
+    settings: settings
+    closed: boolean
     votes: object[] | null
     graph?: string //UUID to graph obj, contains the date 
 }
@@ -33,7 +34,10 @@ export interface graph {
     id: string //UUID of the graph
 }
 
-export interface option {
-    question: string
-    emoji: string
+export interface settings {
+    poll_id: string
+    anonymousVotes: boolean
+    customPrompts: string[] | null
+    numOptions: number
+    endTimestamp: string | null
 }

@@ -3,6 +3,7 @@ import { presets } from '../Data';
 import { stripIndents } from 'common-tags'
 import { poll } from '../../typings';
 import BasePoll from './Poll';
+import PollyClient from '../Client';
 
 // A utility class for accepting user input to create a poll, the base class is for quick polls
 
@@ -33,7 +34,7 @@ export default class Wizard {
         this.message = await this.channel.send(this._embed)
         await this._awaitTitle()
         await this._awaitPreset()
-        return new BasePoll(this._title, this._cmdMessage.author.id, this._cmdMessage.guild.id, this._options)
+        return await this._finalize();
     }
 
     private async _handleError(errorString: string): Promise<void> {
@@ -43,7 +44,7 @@ export default class Wizard {
 
     private async _finalize(): Promise<BasePoll> {
         await this.message.delete().catch(() => {})
-        return new BasePoll(this._title, this._cmdMessage.author.id, this._cmdMessage.guild.id, this._options)
+        return new BasePoll((this._cmdMessage.client as PollyClient).PGClient, this._title, this._cmdMessage.author.id, this._cmdMessage.guild.id, this._options, false, null, 0, null)
     }
 
     private async _cancel(collector: MessageCollector): Promise<void> {

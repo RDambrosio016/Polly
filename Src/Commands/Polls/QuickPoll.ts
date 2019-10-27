@@ -1,5 +1,6 @@
 import { Command } from 'discord-akairo'
 import Wizard from '../../Structures/Wizard';
+import BasePoll from '../../Structures/Poll';
 
 export default class QuickPoll extends Command {
 
@@ -12,6 +13,7 @@ export default class QuickPoll extends Command {
     }
 
     public async exec(message, args) {
-        await new Wizard(message.channel, message).exec()
+        let poll = await new Wizard(message.channel, message).exec()
+        await poll.save()
     }
 }
