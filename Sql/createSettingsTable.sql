@@ -4,5 +4,6 @@ CREATE TABLE IF NOT EXISTS settings (
     customPrompts TEXT[] DEFAULT NULL,
     numOptions INT DEFAULT 0,
     endTimestamp TEXT DEFAULT NULL,
+    allowedRoles TEXT[] DEFAULT NULL,
     FOREIGN KEY (poll_id) REFERENCES polls(id)
 );

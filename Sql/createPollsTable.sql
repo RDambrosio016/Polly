@@ -5,4 +5,5 @@ CREATE TABLE IF NOT EXISTS polls (
     closed BOOLEAN DEFAULT FALSE,
     id UUID NOT NULL UNIQUE PRIMARY KEY,
     options TEXT[] NOT NULL,
+    FOREIGN KEY (guild) REFERENCES guilds(id)
 );

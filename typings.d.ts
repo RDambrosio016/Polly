@@ -41,3 +41,10 @@ export interface settings {
     numOptions: number
     endTimestamp: string | null
 }
+
+export interface guild {
+    id: string
+    prefix: string
+    pollMasterRole: string | null
+    creationPermissions: number
+}

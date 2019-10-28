@@ -12,6 +12,9 @@ export default class PollyClient extends AkairoClient {
         }, {
             disableEveryone: true
         })
+    }
+
+    public async setup() {
         this.commandHandler = new CommandHandler(this, {
             directory: path.join(__dirname, 'Commands'),
             prefix:'+',
@@ -22,9 +25,6 @@ export default class PollyClient extends AkairoClient {
         this.listenerHandler = new ListenerHandler(this, {
             directory: path.join(__dirname, 'Listeners')
         })
-    }
-
-    public async setup() {
         this.commandHandler.useListenerHandler(this.listenerHandler);
         this.listenerHandler.setEmitters({
           commandHandler: this.commandHandler,
