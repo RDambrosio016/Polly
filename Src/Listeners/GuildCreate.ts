@@ -12,6 +12,12 @@ export default class GuildCreateListener extends Listener {
     
     public async exec(guild: Guild) {
         let client = this.client as PollyClient
-        
+        await client.PGClient.addGuild({
+            id: guild.id,
+            prefix: "p!",
+            pollMasterRole: null,
+            creationPermissions: 0
+        })
+        console.log("Added new guild")
     }
 }

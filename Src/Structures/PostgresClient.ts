@@ -11,6 +11,7 @@ export default class PGClient {
     private _addPollSQL: string = readFileSync("Sql/addPoll.sql").toString()
     private _addSettingsSQL: string = readFileSync("Sql/addSettings.sql").toString()
     private _addGuildSQL: string = readFileSync("Sql/addGuild.sql").toString()
+    private _removeGuildSQL: string = readFileSync("Sql/removeGuild.sql").toString()
 
     constructor() {
         this.db = new pg.Client({
@@ -22,20 +23,22 @@ export default class PGClient {
         })
     }
 
-    public async connect() {
+    public async connect(): Promise<this> {
         await this.db.connect().catch(console.error)
         this.connected = true
         this.pollCache = new Collection()
-        for(let i of await this.db.query("SELECT * FROM polls")) {
+        this.guildCache = new Collection()
+
+        for(let i of (await this.db.query("SELECT * FROM polls")).rows) {
             this.pollCache.set(i.id, i)
         }
-        for(let i of await this.db.query("SELECT * FROM guilds")) {
+        for(let i of (await this.db.query("SELECT * FROM guilds")).rows) {
             this.guildCache.set(i.id, i)
         }
         return this;
     }
 
-    public async addPoll(poll: poll) {
+    public async addPoll(poll: poll): Promise<void> {
         await this.db.query(this._addPollSQL, [
             poll.closed, poll.options, poll.id, poll.guild, poll.creator, poll.title
         ])
@@ -45,8 +48,19 @@ export default class PGClient {
         this.pollCache.set(poll.id, poll)
     }
 
-    public async addGuild(guild: guild) {
-
+    public async addGuild(guild: guild): Promise<void> {
+        await this.db.query(this._addGuildSQL, [
+            guild.id, guild.prefix, guild.creationPermissions
+        ])
+        this.guildCache.set(guild.id, guild)
     }
+
+    public async removeGuild(id: string): Promise<void> {
+        await this.db.query(this._removeGuildSQL, [
+            id
+        ])
+        this.guildCache.delete(id)
+    }
+
 }
 
